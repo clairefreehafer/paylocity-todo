@@ -91,12 +91,13 @@ const StyledCalendarCell = styled(CalendarCell)({
 });
 
 type Props = {
+  name: string;
   label: React.ReactNode;
 };
 
-export default function DatePicker({ label }: Props) {
+export default function DatePicker({ name, label }: Props) {
   return (
-    <StyledDatePicker>
+    <StyledDatePicker name={name}>
       <Label>{label}</Label>
       <StyledGroup>
         <StyledDateInput>

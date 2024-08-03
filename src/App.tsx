@@ -46,13 +46,13 @@ const defaultTasks: Task[] = [
   {
     description: "task one",
     completed: false,
-    dueDate: Date.now(),
+    dueDate: "2025-01-01",
     id: Date.now(),
   },
   {
     description: "task two",
     completed: true,
-    dueDate: Date.now(),
+    dueDate: "2024-09-01",
     id: Date.now() + 1,
   },
 ];
