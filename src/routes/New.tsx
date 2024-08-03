@@ -1,3 +1,9 @@
+import Header from "../components/Header";
+
 export default function NewTask() {
-  return <>new task</>;
+  return (
+    <>
+      <Header />
+    </>
+  );
 }

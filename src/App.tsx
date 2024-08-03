@@ -65,7 +65,6 @@ function App() {
       <TaskContext.Provider value={{ tasks, setTasks }}>
         <Global styles={globalStyles} />
         <AppContainer>
-          <Header />
           <RouterProvider router={router} />
         </AppContainer>
       </TaskContext.Provider>
