@@ -1,6 +1,12 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import List from "./routes/List";
 import NewTask from "./routes/New";
+import { Global, Theme, ThemeProvider } from "@emotion/react";
+import { createContext, useState } from "react";
+import { darkTheme } from "./themes";
+import { Task } from "./types";
+import Header from "./components/Header";
+import styled from "@emotion/styled";
 
 const router = createBrowserRouter([
   {
@@ -13,8 +19,58 @@ const router = createBrowserRouter([
   },
 ]);
 
+const globalStyles = (theme: Theme) => ({
+  body: {
+    backgroundColor: theme.color.background,
+    color: theme.color.text,
+  },
+});
+
+const AppContainer = styled.div({
+  maxWidth: 750,
+  width: "80%",
+  margin: "1rem auto",
+});
+
+type TaskList = {
+  tasks: Task[];
+  setTasks: (updatedTasks: Task[]) => void;
+};
+
+export const TaskContext = createContext<TaskList>({
+  tasks: [],
+  setTasks: () => {},
+});
+
+const defaultTasks: Task[] = [
+  {
+    description: "task one",
+    completed: false,
+    dueDate: Date.now(),
+    id: Date.now(),
+  },
+  {
+    description: "task two",
+    completed: true,
+    dueDate: Date.now(),
+    id: Date.now() + 1,
+  },
+];
+
 function App() {
-  return <RouterProvider router={router} />;
+  const [tasks, setTasks] = useState<Task[]>(defaultTasks);
+
+  return (
+    <ThemeProvider theme={darkTheme}>
+      <TaskContext.Provider value={{ tasks, setTasks }}>
+        <Global styles={globalStyles} />
+        <AppContainer>
+          <Header />
+          <RouterProvider router={router} />
+        </AppContainer>
+      </TaskContext.Provider>
+    </ThemeProvider>
+  );
 }
 
 export default App;
