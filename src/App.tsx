@@ -43,13 +43,14 @@ export const TaskContext = createContext<TaskList>({
 
 const defaultTasks: Task[] = [
   {
-    description: "task one",
+    description: "short task",
     completed: false,
     dueDate: "2025-01-01",
     id: Date.now(),
   },
   {
-    description: "task two",
+    description:
+      "long long long long long long long long long long long long long long long long long long task",
     completed: true,
     dueDate: "2024-09-01",
     id: Date.now() + 1,

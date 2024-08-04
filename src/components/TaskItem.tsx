@@ -2,15 +2,18 @@ import { GridListItem } from "react-aria-components";
 import Checkbox from "./Checkbox";
 import { Task } from "../types";
 import styled from "@emotion/styled";
+import { useContext } from "react";
+import { TaskContext } from "../App";
 
-const StyledGridListItem = styled(GridListItem)<{ isCompleted: boolean }>(
+const StyledGridListItem = styled(GridListItem)<{ $isCompleted: boolean }>(
   {
+    alignItems: "center",
     display: "flex",
     gap: "0.5rem",
     justifyContent: "space-between",
   },
-  ({ isCompleted, theme }) =>
-    isCompleted && {
+  ({ $isCompleted, theme }) =>
+    $isCompleted && {
       textDecoration: "line-through",
       color: theme.color.completed,
     }
@@ -21,33 +24,54 @@ const Group = styled.div({
   gap: "0.5rem",
 });
 
-const Description = styled.p<{ isCompleted: boolean }>(
+const Description = styled.p<{ $isCompleted: boolean }>(
   {},
-  ({ isCompleted, theme }) =>
-    isCompleted && {
+  ({ $isCompleted, theme }) =>
+    $isCompleted && {
       // textDecoration: "line-through",
       color: theme.color.completed,
     }
 );
+
+const Due = styled.p({
+  minWidth: 120,
+});
 
 type Props = {
   task: Task;
 };
 
 export default function TaskItem({ task }: Props) {
+  const { tasks, setTasks } = useContext(TaskContext);
+
+  function handleTaskStatus(idOfUpdatedTask: number) {
+    const indexOfUpdatedTask = tasks.findIndex(
+      (task) => task.id === idOfUpdatedTask
+    );
+    const updatedTasks = [...tasks];
+    const taskToUpdate = updatedTasks[indexOfUpdatedTask];
+
+    taskToUpdate.completed = !taskToUpdate.completed;
+
+    setTasks(updatedTasks);
+  }
+
   return (
     <StyledGridListItem
       textValue={task.description}
-      isCompleted={task.completed}
+      $isCompleted={task.completed}
     >
       <Group>
-        <Checkbox isSelected={task.completed} />
-        <Description isCompleted={task.completed}>
+        <Checkbox
+          isSelected={task.completed}
+          onChange={() => handleTaskStatus(task.id)}
+        />
+        <Description $isCompleted={task.completed}>
           {task.description}
         </Description>
       </Group>
 
-      <p>due {new Date(task.dueDate).toLocaleDateString()}</p>
+      <Due>due {new Date(task.dueDate).toLocaleDateString()}</Due>
     </StyledGridListItem>
   );
 }

@@ -1,62 +1,63 @@
 import styled from "@emotion/styled/macro";
-import { Checkbox as ReactAriaCheckbox } from "react-aria-components";
+import {
+  CheckboxProps,
+  Checkbox as ReactAriaCheckbox,
+} from "react-aria-components";
 
-// Copied most of these styles from the react-aria docs, which is why they
-// are strings when I use object styles most other places.
-const CheckboxBorder = styled.div`
-  width: 1.143rem;
-  height: 1.143rem;
-  border: 2px solid ${({ theme }) => theme.color.text};
-  border-radius: 4px;
-  transition: all 200ms;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
+const CheckboxBorder = styled.div(
+  {
+    alignItems: "center",
+    borderRadius: "4px",
+    display: "flex",
+    height: "1.25rem",
+    justifyContent: "center",
+    width: "1.25rem",
+  },
+  ({ theme }) => ({
+    border: `2px solid ${theme.color.text}`,
+  })
+);
 
-const StyledCheckbox = styled(ReactAriaCheckbox)`
-  display: flex;
-  align-items: center;
-  gap: 0.571rem;
-  font-size: 1.143rem;
-  color: ${({ theme }) => theme.color.background};
-  forced-color-adjust: none;
+const StyledCheckbox = styled(ReactAriaCheckbox)(
+  {
+    alignItems: "center",
+    display: "flex",
+    fontSize: "0.5rem",
+  },
+  ({ theme }) => ({
+    color: theme.color.background,
 
-  &[data-focus-visible] ${CheckboxBorder} {
-    outline: 2px solid blue;
-    outline-offset: 2px;
-  }
+    "&[data-selected]": {
+      [`${CheckboxBorder}`]: {
+        backgroundColor: theme.color.text,
+      },
+      svg: {
+        strokeDashoffset: 44,
+      },
+    },
+  })
+);
 
-  &[data-selected],
-  &[data-indeterminate] {
-    ${CheckboxBorder} {
-      background: white;
-    }
+const Svg = styled.svg(
+  {
+    height: "1rem",
+    width: "1rem",
+    fill: "none",
+    strokeWidth: 3,
+    strokeDasharray: 22,
+    strokeDashoffset: 66,
+    transition: "all 200ms",
+  },
+  ({ theme }) => ({
+    stroke: theme.color.background,
+  })
+);
 
-    svg {
-      stroke-dashoffset: 44;
-    }
-  }
-`;
+interface Props extends CheckboxProps {}
 
-const Svg = styled.svg`
-  width: 1rem;
-  height: 1rem;
-  fill: none;
-  stroke: ${({ theme }) => theme.color.background};
-  stroke-width: 3px;
-  stroke-dasharray: 22px;
-  stroke-dashoffset: 66;
-  transition: all 200ms;
-`;
-
-type Props = {
-  isSelected: boolean;
-};
-
-export default function Checkbox({ isSelected }: Props) {
+export default function Checkbox(checkboxProps: Props) {
   return (
-    <StyledCheckbox slot={null} isSelected={isSelected}>
+    <StyledCheckbox slot={null} {...checkboxProps}>
       <CheckboxBorder className="checkbox">
         <Svg viewBox="0 0 18 18" aria-hidden="true">
           <polyline points="1 9 7 14 15 4" />
