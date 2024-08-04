@@ -97,9 +97,15 @@ const StyledCalendarCell = styled(CalendarCell)(
 );
 
 interface Props extends DatePickerProps<DateValue> {
+  /** Label to display above the DatePicker. */
   label: React.ReactNode;
 }
 
+/** Styled date-only picker component. Includes a popover calendar component
+ * for selection. Recommend using the @internationalized/date library for handling
+ * dates when used. For more in-depth information, see
+ * https://react-spectrum.adobe.com/react-aria/DatePicker.html
+ */
 export default function DatePicker({ label, ...datePickerProps }: Props) {
   return (
     <StyledDatePicker {...datePickerProps}>

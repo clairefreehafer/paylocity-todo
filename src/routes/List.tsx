@@ -5,6 +5,7 @@ import TaskItem from "../components/TaskItem";
 import Header from "../components/Header";
 import Filter from "../components/Filter";
 
+/** List page for displaying and interacting with tasks. */
 export default function List() {
   const { tasks } = useContext(TaskContext);
   const [tasksToShow, setTasksToShow] = useState(tasks);
@@ -13,7 +14,7 @@ export default function List() {
     <>
       <Header />
 
-      <Filter allTasks={tasks} updateTasks={setTasksToShow} />
+      <Filter allTasks={tasks} updateVisibleTasks={setTasksToShow} />
 
       <GridList
         aria-label="Task list."

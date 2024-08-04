@@ -37,14 +37,22 @@ const StyledRadio = styled(Radio)(
   })
 );
 
+export type RadioGroupOption = {
+  value: string;
+  display: string;
+};
+
 interface Props extends RadioGroupProps {
+  /** Label to display ahead of the radio options. */
   label: string;
-  options: {
-    value: string;
-    display: string;
-  }[];
+  /** Radio options to display. */
+  options: RadioGroupOption[];
 }
 
+/** Horizontal styled RadioGroup component. Displays label in front of
+ * radio options. For in-depth documentation see
+ * https://react-spectrum.adobe.com/react-aria/RadioGroup.html
+ */
 export default function RadioGroup({
   label,
   options,

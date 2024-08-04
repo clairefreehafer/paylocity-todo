@@ -38,9 +38,13 @@ const Due = styled.p({
 });
 
 type Props = {
+  /** Task data to display. */
   task: Task;
 };
 
+/** Styled component to display Task info. Includes Checkbox for status,
+ * task description, and due date.
+ */
 export default function TaskItem({ task }: Props) {
   const { tasks, setTasks } = useContext(TaskContext);
 
@@ -65,6 +69,7 @@ export default function TaskItem({ task }: Props) {
         <Checkbox
           isSelected={task.completed}
           onChange={() => handleTaskStatus(task.id)}
+          slot="selection"
         />
         <Description $isCompleted={task.completed}>
           {task.description}

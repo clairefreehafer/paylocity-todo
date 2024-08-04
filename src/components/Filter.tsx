@@ -1,11 +1,12 @@
 import styled from "@emotion/styled";
-import RadioGroup from "./RadioGroup";
+import RadioGroup, { RadioGroupOption } from "./RadioGroup";
 import { useState } from "react";
 import { Task } from "../types";
 
+/** All possible filter values. */
 type FilterOptions = "all" | "incomplete" | "complete";
 
-const filterOptions = [
+const filterOptions: RadioGroupOption[] = [
   {
     value: "all",
     display: "All",
@@ -26,25 +27,32 @@ const Container = styled.div({
 });
 
 type Props = {
+  /** Array of all existing tasks. */
   allTasks: Task[];
-  updateTasks: (updatedTasks: Task[]) => void;
+  /** Function to update what tasks to display based on the selected filter.
+   * (i.e. state or redux dispatch)
+   */
+  updateVisibleTasks: (updatedTasks: Task[]) => void;
 };
 
-export default function Filter({ allTasks, updateTasks }: Props) {
+/** Component that handles filtering tasks. Displays a RadioGroup of all
+ * filtering options.
+ */
+export default function Filter({ allTasks, updateVisibleTasks }: Props) {
   const [filter, setFilter] = useState<FilterOptions>("all");
 
   function handleFilterChange(filterChoice: FilterOptions) {
     setFilter(filterChoice);
 
     if (filterChoice === "all") {
-      updateTasks(allTasks);
+      updateVisibleTasks(allTasks);
     } else {
       const completedBoolean = filterChoice === "complete";
 
       const filteredTasks = allTasks.filter(
         (task) => task.completed === completedBoolean
       );
-      updateTasks(filteredTasks);
+      updateVisibleTasks(filteredTasks);
     }
   }
 

@@ -53,11 +53,12 @@ const Svg = styled.svg(
   })
 );
 
-interface Props extends CheckboxProps {}
-
-export default function Checkbox(checkboxProps: Props) {
+/** Styled checkbox component. For in-depth documentation see
+ * https://react-spectrum.adobe.com/react-aria/Checkbox.html
+ */
+export default function Checkbox(checkboxProps: CheckboxProps) {
   return (
-    <StyledCheckbox slot={null} {...checkboxProps}>
+    <StyledCheckbox {...checkboxProps}>
       <CheckboxBorder className="checkbox">
         <Svg viewBox="0 0 18 18" aria-hidden="true">
           <polyline points="1 9 7 14 15 4" />

@@ -20,9 +20,13 @@ const StyledTextField = styled(TextField)({
 const StyledInput = styled(Input)({}, ({ theme }) => inputStyles(theme));
 
 interface Props extends TextFieldProps {
+  /** Label to display above text input. */
   label: React.ReactNode;
 }
 
+/** Styled text-type input element. For in-depth documentation, see
+ * https://react-spectrum.adobe.com/react-aria/TextField.html
+ */
 export default function TextInput({ label, ...textFieldProps }: Props) {
   return (
     <StyledTextField {...textFieldProps}>

@@ -6,8 +6,9 @@ const StyledButton = styled(ReactAriaButton)({}, ({ theme }) =>
   inputStyles(theme)
 );
 
-interface Props extends ButtonProps {}
-
-export default function Button({ children, ...buttonProps }: Props) {
+/** Generic styled button component. For more detailed information, see
+ * https://react-spectrum.adobe.com/react-aria/Button.html
+ */
+export default function Button({ children, ...buttonProps }: ButtonProps) {
   return <StyledButton {...buttonProps}>{children}</StyledButton>;
 }

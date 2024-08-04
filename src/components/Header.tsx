@@ -29,6 +29,7 @@ const StyledLink = styled(Link)<{ $active: boolean }>(
     }
 );
 
+/** Site header which includes page navigation. */
 export default function Header() {
   const { pathname } = useLocation();
 

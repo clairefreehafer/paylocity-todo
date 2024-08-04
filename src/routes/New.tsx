@@ -18,6 +18,7 @@ const StyledForm = styled(Form)({
   maxWidth: "300px",
 });
 
+/** Form page for adding a new task. */
 export default function NewTask() {
   const { tasks, setTasks } = useContext(TaskContext);
   const navigate = useNavigate();
