@@ -1,3 +1,5 @@
+/** @jsxImportSource @emotion/react */
+
 import styled from "@emotion/styled";
 import {
   Button,
@@ -5,7 +7,9 @@ import {
   CalendarCell,
   CalendarGrid,
   DateInput,
+  DatePickerProps,
   DateSegment,
+  DateValue,
   Dialog,
   Group,
   Heading,
@@ -13,10 +17,19 @@ import {
   Popover,
   DatePicker as ReactAriaDatePicker,
 } from "react-aria-components";
+import { inputStyles } from "../styles";
 
-const StyledDatePicker = styled(ReactAriaDatePicker)({}, ({ theme }) => ({
-  color: theme.color.text,
-}));
+const StyledDatePicker = styled(ReactAriaDatePicker)(
+  {
+    display: "flex",
+    flexDirection: "column",
+    gap: "0.5rem",
+    justifyContent: "flex-start",
+  },
+  ({ theme }) => ({
+    color: theme.color.text,
+  })
+);
 
 const StyledGroup = styled(Group)({
   display: "flex",
@@ -24,42 +37,27 @@ const StyledGroup = styled(Group)({
   alignItems: "center",
 });
 
-const StyledDateInput = styled(DateInput)`
-  border: 1px solid ${({ theme }) => theme.color.text};
-  background: ${({ theme }) => theme.color.background};
-  white-space: nowrap;
-  forced-color-adjust: none;
-  border-radius: 6px;
-  width: fit-content;
-  min-width: 150px;
-  padding: 4px;
-  display: flex;
-`;
+const StyledDateInput = styled(DateInput)(
+  {
+    display: "flex",
+    minWidth: "150px",
+    whiteSpace: "nowrap",
+    width: "fit-content",
+  },
+  ({ theme }) => inputStyles(theme)
+);
 
-const StyledButton = styled(Button)`
-  background: ${({ theme }) => theme.color.background};
-  color: ${({ theme }) => theme.color.text};
-  border: 2px solid ${({ theme }) => theme.color.text};
-  forced-color-adjust: none;
-  border-radius: 4px;
-  border: none;
-  margin-left: -1.929rem;
-  width: 1.429rem;
-  height: 1.429rem;
-  padding: 0;
-  font-size: 0.857rem;
-  box-sizing: content-box;
-`;
+const ArrowButton = styled(Button)(
+  {
+    border: "none",
+  },
+  ({ theme }) => ({
+    background: theme.color.background,
+    color: theme.color.text,
+  })
+);
 
-const StyledPopover = styled(Popover)`
-  border: 1px solid ${({ theme }) => theme.color.text};
-  background: ${({ theme }) => theme.color.background};
-  color: ${({ theme }) => theme.color.text};
-  border-radius: 6px;
-  outline: none;
-  max-width: 250px;
-  box-shadow: 0 8px 20px #0000001a;
-`;
+const StyledPopover = styled(Popover)({}, ({ theme }) => inputStyles(theme));
 
 const StyledHeader = styled.header({
   alignItems: "center",
@@ -90,28 +88,27 @@ const StyledCalendarCell = styled(CalendarCell)({
   padding: "0.25rem",
 });
 
-type Props = {
-  name: string;
+interface Props extends DatePickerProps<DateValue> {
   label: React.ReactNode;
-};
+}
 
-export default function DatePicker({ name, label }: Props) {
+export default function DatePicker({ label, ...datePickerProps }: Props) {
   return (
-    <StyledDatePicker name={name}>
+    <StyledDatePicker {...datePickerProps}>
       <Label>{label}</Label>
       <StyledGroup>
         <StyledDateInput>
           {(segment) => <DateSegment segment={segment} />}
         </StyledDateInput>
-        <StyledButton>▼</StyledButton>
+        <ArrowButton css={{ marginLeft: "-1.9rem" }}>▼</ArrowButton>
       </StyledGroup>
       <StyledPopover>
         <Dialog>
           <StyledCalendar>
             <StyledHeader>
-              <Button slot="previous">◀</Button>
+              <ArrowButton slot="previous">◀</ArrowButton>
               <StyledHeading />
-              <Button slot="next">▶</Button>
+              <ArrowButton slot="next">▶</ArrowButton>
             </StyledHeader>
             <StyledCalendarGrid>
               {(date) => <StyledCalendarCell date={date} />}

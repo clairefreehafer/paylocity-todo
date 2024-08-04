@@ -1,10 +1,20 @@
-import { Button, Form } from "react-aria-components";
+import { Form } from "react-aria-components";
 import Header from "../components/Header";
 import TextInput from "../components/TextInput";
 import DatePicker from "../components/DatePicker";
 import { useContext } from "react";
 import { TaskContext } from "../App";
 import { Task } from "../types";
+import styled from "@emotion/styled";
+import Button from "../components/Button";
+
+const StyledForm = styled(Form)({
+  alignItems: "flex-start",
+  display: "flex",
+  flexDirection: "column",
+  gap: "1rem",
+  maxWidth: "300px",
+});
 
 export default function NewTask() {
   const { tasks, setTasks } = useContext(TaskContext);
@@ -26,11 +36,11 @@ export default function NewTask() {
     <>
       <Header />
       <h2>New Task</h2>
-      <Form onSubmit={handleSubmit}>
-        <TextInput name="description" label="Description" />
-        <DatePicker name="dueDate" label="Due date" />
+      <StyledForm onSubmit={handleSubmit}>
+        <TextInput name="description" label="Description" isRequired />
+        <DatePicker name="dueDate" label="Due date" isRequired />
         <Button type="submit">Create</Button>
-      </Form>
+      </StyledForm>
     </>
   );
 }
