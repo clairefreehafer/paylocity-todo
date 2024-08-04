@@ -3,7 +3,7 @@ import Checkbox from "./Checkbox";
 import { Task } from "../types";
 import styled from "@emotion/styled";
 import { useContext } from "react";
-import { TaskContext } from "../App";
+import { TaskContext } from "../TaskProvider";
 
 const StyledGridListItem = styled(GridListItem)<{ $isCompleted: boolean }>(
   {
@@ -69,7 +69,8 @@ export default function TaskItem({ task }: Props) {
         <Checkbox
           isSelected={task.completed}
           onChange={() => handleTaskStatus(task.id)}
-          slot="selection"
+          slot={null}
+          aria-label={`Mark task ${task.completed ? "incomplete" : "complete"}`}
         />
         <Description $isCompleted={task.completed}>
           {task.description}

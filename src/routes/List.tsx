@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { TaskContext } from "../App";
+import { TaskContext } from "../TaskProvider";
 import { GridList } from "react-aria-components";
 import TaskItem from "../components/TaskItem";
 import Header from "../components/Header";

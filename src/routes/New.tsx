@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import TextInput from "../components/TextInput";
 import DatePicker from "../components/DatePicker";
 import { useContext } from "react";
-import { TaskContext } from "../App";
+import { TaskContext } from "../TaskProvider";
 import { Task } from "../types";
 import styled from "@emotion/styled";
 import Button from "../components/Button";

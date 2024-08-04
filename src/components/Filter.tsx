@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import RadioGroup, { RadioGroupOption } from "./RadioGroup";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Task } from "../types";
 
 /** All possible filter values. */
@@ -55,6 +55,21 @@ export default function Filter({ allTasks, updateVisibleTasks }: Props) {
       updateVisibleTasks(filteredTasks);
     }
   }
+
+  useEffect(() => {
+    // Update displayed tasks if completed status changes.
+    // NOTE: This currently runs way more often than it needs to, since
+    // it is reacting to every possible change to the tasks context. With
+    // more time I would optimize this.
+    if (filter !== "all") {
+      const completedBoolean = filter === "complete";
+
+      const filteredTasks = allTasks.filter(
+        (task) => task.completed === completedBoolean
+      );
+      updateVisibleTasks(filteredTasks);
+    }
+  }, [allTasks]);
 
   return (
     <Container>
