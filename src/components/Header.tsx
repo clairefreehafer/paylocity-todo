@@ -5,22 +5,25 @@ const StyledHeader = styled.header({
   alignItems: "center",
   display: "flex",
   justifyContent: "space-between",
+  paddingBottom: "1rem",
 });
 
-const H1 = styled.h1({});
+const H1 = styled.h1({
+  margin: 0,
+});
 
 const Group = styled.div({
   display: "flex",
   gap: "1rem",
 });
 
-const StyledLink = styled(Link)<{ active: boolean }>(
+const StyledLink = styled(Link)<{ $active: boolean }>(
   {},
   ({ theme }) => ({
     color: theme.color.text,
   }),
-  ({ active }) =>
-    active && {
+  ({ $active }) =>
+    $active && {
       textDecoration: "none",
       fontWeight: "bold",
     }
@@ -29,16 +32,14 @@ const StyledLink = styled(Link)<{ active: boolean }>(
 export default function Header() {
   const { pathname } = useLocation();
 
-  console.log(pathname);
-
   return (
     <StyledHeader>
       <H1>To-Do List</H1>
       <Group>
-        <StyledLink to="/" active={pathname === "/"}>
+        <StyledLink to="/" $active={pathname === "/"}>
           Task list
         </StyledLink>
-        <StyledLink to="/new" active={pathname === "/new"}>
+        <StyledLink to="/new" $active={pathname === "/new"}>
           Add task
         </StyledLink>
       </Group>

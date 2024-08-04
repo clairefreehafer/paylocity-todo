@@ -5,7 +5,6 @@ import { Global, Theme, ThemeProvider } from "@emotion/react";
 import { createContext, useState } from "react";
 import { darkTheme } from "./themes";
 import { Task } from "./types";
-import Header from "./components/Header";
 import styled from "@emotion/styled";
 
 const router = createBrowserRouter([

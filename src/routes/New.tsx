@@ -7,6 +7,8 @@ import { TaskContext } from "../App";
 import { Task } from "../types";
 import styled from "@emotion/styled";
 import Button from "../components/Button";
+import { useNavigate } from "react-router-dom";
+import { getLocalTimeZone, today } from "@internationalized/date";
 
 const StyledForm = styled(Form)({
   alignItems: "flex-start",
@@ -18,11 +20,11 @@ const StyledForm = styled(Form)({
 
 export default function NewTask() {
   const { tasks, setTasks } = useContext(TaskContext);
+  const navigate = useNavigate();
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(e.currentTarget));
-
     const newTask: Task = {
       id: Date.now(),
       description: data.description as string,
@@ -31,6 +33,7 @@ export default function NewTask() {
     };
 
     setTasks([...tasks, newTask]);
+    navigate("/");
   }
   return (
     <>
@@ -38,7 +41,12 @@ export default function NewTask() {
       <h2>New Task</h2>
       <StyledForm onSubmit={handleSubmit}>
         <TextInput name="description" label="Description" isRequired />
-        <DatePicker name="dueDate" label="Due date" isRequired />
+        <DatePicker
+          name="dueDate"
+          label="Due date"
+          minValue={today(getLocalTimeZone())}
+          isRequired
+        />
         <Button type="submit">Create</Button>
       </StyledForm>
     </>

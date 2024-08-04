@@ -5,5 +5,6 @@ export const darkTheme: Theme = {
     background: "black",
     text: "white",
     completed: "grey",
+    error: "salmon",
   },
 };

@@ -11,6 +11,7 @@ import {
   DateSegment,
   DateValue,
   Dialog,
+  FieldError,
   Group,
   Heading,
   Label,
@@ -81,12 +82,19 @@ const StyledCalendarGrid = styled(CalendarGrid)({
   width: "100%",
 });
 
-const StyledCalendarCell = styled(CalendarCell)({
-  alignItems: "center",
-  display: "flex",
-  justifyContent: "center",
-  padding: "0.25rem",
-});
+const StyledCalendarCell = styled(CalendarCell)(
+  {
+    alignItems: "center",
+    display: "flex",
+    justifyContent: "center",
+    padding: "0.25rem",
+  },
+  ({ theme }) => ({
+    "&[data-disabled]": {
+      color: theme.color.completed,
+    },
+  })
+);
 
 interface Props extends DatePickerProps<DateValue> {
   label: React.ReactNode;
@@ -102,6 +110,7 @@ export default function DatePicker({ label, ...datePickerProps }: Props) {
         </StyledDateInput>
         <ArrowButton css={{ marginLeft: "-1.9rem" }}>▼</ArrowButton>
       </StyledGroup>
+      <FieldError css={(theme) => ({ color: theme.color.error })} />
       <StyledPopover>
         <Dialog>
           <StyledCalendar>

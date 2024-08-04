@@ -8,4 +8,8 @@ export const inputStyles = (theme: Theme) => ({
   flex: "0 0 auto",
   fontSize: "1rem",
   padding: "0.5rem",
+
+  "&[data-invalid]": {
+    borderColor: theme.color.error,
+  },
 });

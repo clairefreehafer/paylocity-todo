@@ -1,5 +1,13 @@
+/** @jsxImportSource @emotion/react */
+
 import styled from "@emotion/styled";
-import { Input, Label, TextField, TextFieldProps } from "react-aria-components";
+import {
+  FieldError,
+  Input,
+  Label,
+  TextField,
+  TextFieldProps,
+} from "react-aria-components";
 import { inputStyles } from "../styles";
 
 const StyledTextField = styled(TextField)({
@@ -20,6 +28,7 @@ export default function TextInput({ label, ...textFieldProps }: Props) {
     <StyledTextField {...textFieldProps}>
       <Label>{label}</Label>
       <StyledInput />
+      <FieldError css={(theme) => ({ color: theme.color.error })} />
     </StyledTextField>
   );
 }
