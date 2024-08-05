@@ -58,8 +58,6 @@ const ArrowButton = styled(Button)(
   })
 );
 
-const StyledPopover = styled(Popover)({}, ({ theme }) => inputStyles(theme));
-
 const StyledHeader = styled.header({
   alignItems: "center",
   margin: "1rem",
@@ -103,21 +101,25 @@ interface Props extends DatePickerProps<DateValue> {
 
 /** Styled date-only picker component. Includes a popover calendar component
  * for selection. Recommend using the @internationalized/date library for handling
- * dates when used. For more in-depth information, see
- * https://react-spectrum.adobe.com/react-aria/DatePicker.html
+ * dates when used.
+ *
+ * @see {@link https://react-spectrum.adobe.com/react-aria/DatePicker.html| React Aria documentation}
  */
 export default function DatePicker({ label, ...datePickerProps }: Props) {
   return (
     <StyledDatePicker {...datePickerProps}>
       <Label>{label}</Label>
+
       <StyledGroup>
         <StyledDateInput>
           {(segment) => <DateSegment segment={segment} />}
         </StyledDateInput>
         <ArrowButton css={{ marginLeft: "-1.9rem" }}>▼</ArrowButton>
       </StyledGroup>
+
       <FieldError css={(theme) => ({ color: theme.color.error })} />
-      <StyledPopover>
+
+      <Popover css={inputStyles}>
         <Dialog>
           <StyledCalendar>
             <StyledHeader>
@@ -130,7 +132,7 @@ export default function DatePicker({ label, ...datePickerProps }: Props) {
             </StyledCalendarGrid>
           </StyledCalendar>
         </Dialog>
-      </StyledPopover>
+      </Popover>
     </StyledDatePicker>
   );
 }

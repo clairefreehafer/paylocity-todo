@@ -37,6 +37,8 @@ type Props = {
 
 /** Component that handles filtering tasks. Displays a RadioGroup of all
  * filtering options.
+ *
+ * @see {@link RadioGroup}
  */
 export default function Filter({ allTasks, updateVisibleTasks }: Props) {
   const [filter, setFilter] = useState<FilterOptions>("all");

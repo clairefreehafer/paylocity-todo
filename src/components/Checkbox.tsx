@@ -53,8 +53,9 @@ const Svg = styled.svg(
   })
 );
 
-/** Styled checkbox component. For in-depth documentation see
- * https://react-spectrum.adobe.com/react-aria/Checkbox.html
+/** Styled checkbox component to be used within a form or standalone.
+ *
+ * @see {@link https://react-spectrum.adobe.com/react-aria/Checkbox.html| React Aria documentation}
  */
 export default function Checkbox(checkboxProps: CheckboxProps) {
   return (

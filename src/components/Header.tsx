@@ -1,3 +1,5 @@
+/** @jsxImportSource @emotion/react */
+
 import styled from "@emotion/styled";
 import { Link, useLocation } from "react-router-dom";
 
@@ -6,10 +8,6 @@ const StyledHeader = styled.header({
   display: "flex",
   justifyContent: "space-between",
   paddingBottom: "1rem",
-});
-
-const H1 = styled.h1({
-  margin: 0,
 });
 
 const Group = styled.div({
@@ -35,7 +33,7 @@ export default function Header() {
 
   return (
     <StyledHeader>
-      <H1>To-Do List</H1>
+      <h1 css={{ margin: 0 }}>To-Do List</h1>
       <Group>
         <StyledLink to="/" $active={pathname === "/"}>
           Task list

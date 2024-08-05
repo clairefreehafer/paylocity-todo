@@ -24,8 +24,9 @@ interface Props extends TextFieldProps {
   label: React.ReactNode;
 }
 
-/** Styled text-type input element. For in-depth documentation, see
- * https://react-spectrum.adobe.com/react-aria/TextField.html
+/** Styled text-type input element.
+ *
+ * @see {@link https://react-spectrum.adobe.com/react-aria/TextField.html| React Aria documentation}
  */
 export default function TextInput({ label, ...textFieldProps }: Props) {
   return (

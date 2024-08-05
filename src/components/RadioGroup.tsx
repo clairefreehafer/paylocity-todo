@@ -50,8 +50,9 @@ interface Props extends RadioGroupProps {
 }
 
 /** Horizontal styled RadioGroup component. Displays label in front of
- * radio options. For in-depth documentation see
- * https://react-spectrum.adobe.com/react-aria/RadioGroup.html
+ * radio options.
+ *
+ * @see {@link https://react-spectrum.adobe.com/react-aria/RadioGroup.html| React Aria documentation}
  */
 export default function RadioGroup({
   label,
