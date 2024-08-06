@@ -71,7 +71,7 @@ export default function Filter({ allTasks, updateVisibleTasks }: Props) {
       );
       updateVisibleTasks(filteredTasks);
     }
-  }, [allTasks]);
+  }, [allTasks, filter, updateVisibleTasks]);
 
   return (
     <Container>
